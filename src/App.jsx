@@ -1,45 +1,41 @@
+import { BrowserRouter, Link, Route, Routes } from 'react-router'
 import { Card } from './components/Card'
 import { Titulo } from './components/Titulo'
-import imgUno from './assets/01.webp'
-import imgDos from './assets/02.webp'
-import imgTres from './assets/03.webp'
-import imgCuatro from './assets/04.webp'
-import imgCinco from './assets/05.webp'
+import { Navbar } from './components/Navbar'
+import { Contacto } from './pages/Contacto'
+import { Product } from './pages/Product'
 
 function App() {
   return (
     <div>
-      <h1>Inicio</h1>
-      <Card titulo='Mejora tu juego' enlace='Compra videojuegos'>
-        <img src={imgUno} alt='' />
-      </Card>
-      <Card
-        titulo='Compra los esenciales para tu hogar'
-        enlace='Descubre más en hogar'>
-        <div
-          style={{
-            display: 'grid',
-            gap: 10,
-            gridTemplateColumns: '1fr 1fr'
-          }}>
-          <div>
-            <img src={imgDos} alt='' srcset='' />
-            <p>Limpieza</p>
-          </div>
-          <div>
-            <img src={imgTres} alt='' srcset='' />
-            <p>Almacenamiento</p>
-          </div>
-          <div>
-            <img src={imgCuatro} alt='' srcset='' />
-            <p>Decoracion</p>
-          </div>
-          <div>
-            <img src={imgCinco} alt='' srcset='' />
-            <p>Ropa</p>
-          </div>
-        </div>
-      </Card>
+      <Navbar></Navbar>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path='/'
+            element={<h1>Estoy en el inicio</h1>}></Route>
+          <Route
+            path='/productos'
+            element={<h1>Estoy en productos</h1>}></Route>
+          <Route
+            path='/productos/:id'
+            element={<Product></Product>}></Route>
+          <Route
+            path='/contacto'
+            element={<Contacto></Contacto>}></Route>
+          <Route
+            path='/productos/categoria/todos'
+            element={
+              <h1>Estoy en la categoria de todos los productos</h1>
+            }></Route>
+          <Route
+            path='*'
+            element={
+              <Link to='/'>Volver al inicio con Link</Link> // <a href='/'>Volver al inicio</a>
+            }></Route>
+        </Routes>
+      </BrowserRouter>
+      <footer>Todos los derechos reservados</footer>
     </div>
   )
 }
